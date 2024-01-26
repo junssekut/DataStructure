@@ -10,6 +10,7 @@
 		[] popHead
 		[] popTail
 		[] popMiddle
+		[] displayNodes
 		[] searchNode
 	[] Doubly Linked List
 		[] createNode
@@ -19,4 +20,5 @@
 		[] popHead
 		[] popTail
 		[] popMiddle
+		[] displayNodes
 		[] searchNode

@@ -54,26 +54,22 @@ void pushMiddle(int value, int index) {
 	Node* prev = NULL;
 	int i = 0;
 	
-	while (current != tail && i < index) {
+	while (i < index) {
 		prev = current;
-		current = current->next;
-		if (current->next == NULL) {
+		if (prev == NULL) {
 			puts("index not found");
 			return;
 		}
+		current = current->next;
 		i++;
 	}
 	
-	if (current == head) pushHead(value);
-	else if (current == tail) pushTail(value);
-	else {
-		Node* newNode = createNode(value);
+	Node* newNode = createNode(value);
 		
-		prev->next = newNode;
-		newNode->prev = prev;
-		newNode->next = current;
-		current->prev = newNode;
-	}
+	prev->next = newNode;
+	newNode->prev = prev;
+	newNode->next = current;
+	if (current != NULL) current->prev = newNode;
 }
 
 void popHead() {
@@ -108,34 +104,27 @@ void popMiddle(int index) {
 		return;	
 	}
 	
-	int i = 0;
 	Node* current = head;
 	Node* prev = NULL;
+	int i = 0;
 	
 	while (i < index) {
 		prev = current;
 		current = current->next;
+		if (current == NULL) {
+			puts("index not found");
+			return;
+		}
 		i++;
 	}
 	
-	if (current == NULL) {
-		puts("data not found");
-		return;
+	Node* temp = current;
+	prev->next = current->next;
+	current = current->next;
+	free(temp);
+	if (current != NULL) {
+		current->prev = prev;
 	}
-	
-	if (current == head) {
-		popHead();
-	} else if (current == tail) {
-		popTail();
-	} else {
-		prev->next = current->next;
-		current->next->prev = prev;
-		
-		free(current);
-		current = NULL;
-	}
-	
-	
 }
 
 Node* searchNode(int value) {
@@ -172,7 +161,11 @@ int main() {
 	
 	display();
 	
-	pushMiddle(3, 134134);
+	pushMiddle(344, 1);
+	
+	display();
+	
+	popMiddle(5);
 	
 	display();
 

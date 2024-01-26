@@ -48,17 +48,21 @@ void pushMiddle(int value, int index) {
 	
 	Node* newNode = createNode(value);
 	Node* current = head;
+	Node* prev = NULL;
 	int i = 0;
 	
-	while (current != NULL && i < index) {
+	while (i < index) {
+		prev = current;
+		if (prev == NULL) {
+			puts("index not found");
+			return;
+		}
 		current = current->next;
 		i++;
 	}
 	
-	if (current != NULL) {
-		newNode->next = current->next;
-		current->next = newNode;
-	}
+	newNode->next = current;
+	prev->next = newNode;
 }
 
 void popHead() {
@@ -101,19 +105,40 @@ void popTail() {
 }
 
 void popMiddle(int index) {
-
-
+	if (head == NULL) {
+		puts("linked list is empty");
+		return;
+	}
+	
+	Node* current = head;
+	Node* prev = NULL;
+	int i = 0;
+	
+	while (i < index) {
+		prev = current;
+		current = current->next;
+		
+		if (current == NULL) {
+			puts("index not found");
+			return;
+		}
+		
+		i++;
+	}
+	
+	prev->next = current->next;
+	free(current);
 }
 
 void displayNodes() {
 	Node* current = head;
 	
 	while (current != NULL) {
-		printf("%d -> ", current->value);
+		printf("%d ", current->value);
 		current = current->next;
 	}
 	
-	printf("NULL");
+	puts("");
 }
 
 Node* search(int value) {
@@ -132,6 +157,21 @@ Node* search(int value) {
 } 
 
 int main() {
+	
+	pushTail(3);
+	pushTail(1);
+	pushTail(7);
+	pushTail(8);
+	
+	displayNodes();
+	
+	pushMiddle(10, 3);
+	
+	displayNodes();
+	
+	popMiddle(4);
+	
+	displayNodes();
 	
 	return 0;
 }
