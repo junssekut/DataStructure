@@ -1,0 +1,22 @@
+[] Pointer
+[] Array Static
+[] Array Dynamic
+[] LinkedList
+	[] Single Linked List
+		[] createNode
+		[] pushHead
+		[] pushTail
+		[] pushMiddle
+		[] popHead
+		[] popTail
+		[] popMiddle
+		[] searchNode
+	[] Doubly Linked List
+		[] createNode
+		[] pushHead
+		[] pushTail
+		[] pushMiddle
+		[] popHead
+		[] popTail
+		[] popMiddle
+		[] searchNode
