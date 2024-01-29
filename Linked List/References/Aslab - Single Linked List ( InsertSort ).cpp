@@ -96,6 +96,7 @@ void popHead(){
 		free(temp);				//free tempnya buat hapus headnya
 		temp = NULL;			//tempnya jadi kosong
 	}
+	
 }
 
 void popTail(){					//ketika datanya kosong
@@ -126,9 +127,10 @@ void popMid(const char* nim){	//patokannya nimnya karena harus unik
 		popTail();
 	} else {
 		Node *current = head;
-		while (current->next != NULL && strcmp(nim, current->next->nim) != 0){	//selama current belum sama dengan NULL dan selama nim yg dicari belum sama dengan current->next
+		while (current != NULL && strcmp(nim, current->nim) != 0){	//selama current belum sama dengan NULL dan selama nim yg dicari belum sama dengan current->next
 			current = current->next;											//maka looping trs
 		}
+		printf("\n\n\n[%s]\n\n\n", current->name);
 		if (current->next == NULL){ //kalau ternyata datanya gaada
 			puts("Not Found!");		//print ini
 			return;
