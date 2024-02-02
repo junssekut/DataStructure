@@ -19,16 +19,6 @@ struct Queue {
 	Node* rear;
 };
 
-bool equalsIgnoreCase(const char *str1, const char *str2) {
-	char *low1 = strdup(str1);
-	char *low2 = strdup(str2);
-	
-	for (int i = 0; i < strlen(low1); i++) low1[i] = tolower(low1[i]);
-	for (int i = 0; i < strlen(low2); i++) low2[i] = tolower(low2[i]);
-	
-	return strcmp(low1, low2) == 0;
-}
-
 Patient createPatient(const char *name, int age, const char* priority) {
 	Patient patient;
 	
@@ -75,22 +65,20 @@ Patient createPatient() {
 		printf("Input patient priority [LOW|MID|HIGH]: ");
 		scanf("%s", priorityBuffer);
 		
-		if (equalsIgnoreCase(priorityBuffer, "low") ||
-			equalsIgnoreCase(priorityBuffer, "mid") ||
-			equalsIgnoreCase(priorityBuffer, "high")) {
-				switch (priorityBuffer[0]) {
-					case 'l':
-						patient.priority = 3;
-						break;
-					case 'm':
-						patient.priority = 2;
-						break;
-					case 'h':
-						patient.priority = 1;
-						break;
-				}
-				break;
-			}
+		if (strcmp(priorityBuffer, "LOW") == 0) {
+			patient.priority = 3;
+			break;
+		}
+		
+		if (strcmp(priorityBuffer, "MID") == 0) {
+			patient.priority = 2;
+			break;
+		}
+		
+		if (strcmp(priorityBuffer, "HIGH") == 0) {
+			patient.priority = 1;
+			break;
+		}
 	} while (1);
 	
 	return patient;
